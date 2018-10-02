@@ -1,0 +1,62 @@
+package cc.tonny.optaplanner.exercise.springbootcloudbalance.domain;
+
+import cc.tonny.optaplanner.exercise.springbootcloudbalance.extension.ComputerStrengthComparator;
+import cc.tonny.optaplanner.exercise.springbootcloudbalance.extension.ProcessDifficultyComparator;
+import lombok.Getter;
+import lombok.Setter;
+import org.optaplanner.core.api.domain.entity.PlanningEntity;
+import org.optaplanner.core.api.domain.variable.PlanningVariable;
+
+@PlanningEntity(difficultyComparatorClass = ProcessDifficultyComparator.class)
+//@Entity
+public class CloudProcess extends AbstractEntity {
+    @Setter
+    @Getter
+    private int cpuRequired;
+    @Setter
+    @Getter
+    private int memoryRequired;
+    @Setter
+    @Getter
+    private int networkRequired;
+
+    @Setter
+    @Getter
+    @PlanningVariable(valueRangeProviderRefs = "computerProvider", strengthComparatorClass = ComputerStrengthComparator.class, nullable = true)
+    private CloudComputer cloudComputer;
+
+    public int getDifficultyIndex() {
+        return cpuRequired * memoryRequired * networkRequired;
+    }
+
+    @Override
+    public String toString() {
+        return "CloudProcess - " + id +
+                " with cpuRequired:" + cpuRequired +
+                ", memoryRequired:" + memoryRequired+
+                ", networkRequired:" + networkRequired +
+                "; Assigned to CloudComputer: " + cloudComputer;
+    }
+
+    public CloudProcess(Long id, int cpuRequired, int memoryRequired, int networkRequired) {
+        super(id);
+        this.cpuRequired = cpuRequired;
+        this.memoryRequired = memoryRequired;
+        this.networkRequired = networkRequired;
+    }
+
+    public CloudProcess(Long id, int cpuRequired, int memoryRequired, int networkRequired, CloudComputer cloudComputer) {
+        super(id);
+        this.cpuRequired = cpuRequired;
+        this.memoryRequired = memoryRequired;
+        this.networkRequired = networkRequired;
+        this.cloudComputer = cloudComputer;
+    }
+
+    public CloudProcess(Long id) {
+        super(id);
+    }
+
+    public CloudProcess() {
+    }
+}
