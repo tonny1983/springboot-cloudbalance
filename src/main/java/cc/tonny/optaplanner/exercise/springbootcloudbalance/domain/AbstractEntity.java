@@ -5,12 +5,16 @@ import lombok.Setter;
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.optaplanner.core.api.domain.lookup.PlanningId;
 
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
+@MappedSuperclass
 public class AbstractEntity implements Serializable, Comparable<AbstractEntity> {
     @Setter
     @Getter
     @PlanningId
+    @Id
     protected Long id;
 
     protected AbstractEntity() {

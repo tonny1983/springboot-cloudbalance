@@ -14,7 +14,7 @@
         <!--
         <bestScoreLimit>0hard/-50000soft</bestScoreLimit>
         -->
-        <minutesSpentLimit>2</minutesSpentLimit>
+        <secondsSpentLimit>10</secondsSpentLimit>
     </termination>
     <constructionHeuristic>
         <constructionHeuristicType>FIRST_FIT_DECREASING</constructionHeuristicType>

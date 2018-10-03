@@ -5,10 +5,15 @@ import cc.tonny.optaplanner.exercise.springbootcloudbalance.extension.ProcessDif
 import lombok.Getter;
 import lombok.Setter;
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
+import org.optaplanner.core.api.domain.solution.cloner.DeepPlanningClone;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+
 @PlanningEntity(difficultyComparatorClass = ProcessDifficultyComparator.class)
-//@Entity
+@Entity
+@DeepPlanningClone
 public class CloudProcess extends AbstractEntity {
     @Setter
     @Getter
@@ -23,6 +28,7 @@ public class CloudProcess extends AbstractEntity {
     @Setter
     @Getter
     @PlanningVariable(valueRangeProviderRefs = "computerProvider", strengthComparatorClass = ComputerStrengthComparator.class, nullable = true)
+    @ManyToOne
     private CloudComputer cloudComputer;
 
     public int getDifficultyIndex() {

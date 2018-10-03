@@ -2,7 +2,12 @@ package cc.tonny.optaplanner.exercise.springbootcloudbalance.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.optaplanner.core.api.domain.solution.cloner.DeepPlanningClone;
 
+import javax.persistence.Entity;
+
+@Entity
+@DeepPlanningClone
 public class CloudComputer extends AbstractEntity{
     @Setter
     @Getter
